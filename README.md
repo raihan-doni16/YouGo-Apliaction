@@ -1,1 +1,1 @@
-# YouGo-Apliaction
+# YouGo-App
