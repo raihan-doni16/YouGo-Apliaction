@@ -12,4 +12,6 @@
     <string name="upload">Uploud</string>
     <string name="search_home">Cari Pose dengan Gambar</string>
     <string name="yougo_image">yougo_image</string>
+    <string name="preview">Preview</string>
+    <string name="back">Kembali</string>
 </resources>
