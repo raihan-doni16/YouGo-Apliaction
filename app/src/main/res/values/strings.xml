@@ -4,10 +4,12 @@
     <string name="tab_2">Sign Up</string>
     <string name="Explore">Explore</string>
     <string name="recomendation_home">Rekomendasi</string>
-    <string name="article_home">Artikel Kesehatan</string>
-    <string name="recipe_home">Resep Sehat</string>
+    <string name="article_home">Artikel Kebugaran</string>
+    <string name="pose_yoga">Pose Yoga by YouGo</string>
     <string name="deteksi_pose">Deteksi Yoga Pose</string>
     <string name="kamera">Kamera</string>
     <string name="gallery">Gallery</string>
     <string name="upload">Uploud</string>
+    <string name="search_home">Cari Pose dengan Gambar</string>
+    <string name="yougo_image">yougo_image</string>
 </resources>
