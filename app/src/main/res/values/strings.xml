@@ -17,4 +17,6 @@
     <string name="gaya_pose">Jenis gaya pose yang digunakan :</string>
     <string name="result">Hasil :</string>
     <string name="imageview_camera">preview</string>
+    <string name="search_artikle">Cari Artikel Kebugaran</string>
+    <string name="artikle_terkini">Artikel Kebugaran Terkini</string>
 </resources>
