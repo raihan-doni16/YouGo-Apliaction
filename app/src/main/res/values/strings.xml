@@ -19,4 +19,6 @@
     <string name="imageview_camera">preview</string>
     <string name="search_artikle">Cari Artikel Kebugaran</string>
     <string name="artikle_terkini">Artikel Kebugaran Terkini</string>
+    <string name="search_pose">Cari Pose</string>
+
 </resources>
