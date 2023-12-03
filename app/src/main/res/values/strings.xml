@@ -32,5 +32,8 @@
     <string name="keluar">Keluar</string>
     <string name="_45">45</string>
     <string name="email_edit_user">clara@gmail.com</string>
+    <string name="nama_pose">Child Pose</string>
+
+    <string name="Instruksi">Langkah</string>
 
 </resources>
