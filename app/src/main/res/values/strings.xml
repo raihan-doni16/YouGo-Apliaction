@@ -14,4 +14,7 @@
     <string name="yougo_image">yougo_image</string>
     <string name="preview">Preview</string>
     <string name="back">Kembali</string>
+    <string name="gaya_pose">Jenis gaya pose yang digunakan :</string>
+    <string name="result">Hasil :</string>
+    <string name="imageview_camera">preview</string>
 </resources>
