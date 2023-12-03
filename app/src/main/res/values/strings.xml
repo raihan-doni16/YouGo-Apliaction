@@ -20,5 +20,17 @@
     <string name="search_artikle">Cari Artikel Kebugaran</string>
     <string name="artikle_terkini">Artikel Kebugaran Terkini</string>
     <string name="search_pose">Cari Pose</string>
+    <string name="name_user">Nama</string>
+    <string name="nama_depan_user">Nama Depan</string>
+    <string name="nama_belakang_user">Nama Belakang</string>
+    <string name="email_user">Email</string>
+    <string name="berat_user">Berat</string>
+    <string name="tinggi_user">Tinggi</string>
+    <string name="umur_user">Umur</string>
+    <string name="nama_user">Clara</string>
+    <string name="simpan">SIMPAN</string>
+    <string name="keluar">Keluar</string>
+    <string name="_45">45</string>
+    <string name="email_edit_user">clara@gmail.com</string>
 
 </resources>
