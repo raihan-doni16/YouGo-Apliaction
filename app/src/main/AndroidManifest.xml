@@ -13,6 +13,12 @@
         android:theme="@style/Theme.YouGoApp"
         tools:targetApi="31">
         <activity
+            android:name=".BenefitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LangkahActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditUserActivity"
             android:exported="false" />
         <activity
