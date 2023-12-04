@@ -1,11 +1,12 @@
-package com.example.yougoapp
+package com.example.yougoapp.ui.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.yougoapp.R
 
-class DetailArticleActivity : AppCompatActivity() {
+class EditUserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_article)
+        setContentView(R.layout.activity_edit_user)
     }
 }

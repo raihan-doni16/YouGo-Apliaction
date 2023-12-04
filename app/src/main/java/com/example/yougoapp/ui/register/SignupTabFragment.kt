@@ -1,8 +1,9 @@
-package com.example.yougoapp
+package com.example.yougoapp.ui.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import com.example.yougoapp.R
 import com.example.yougoapp.databinding.FragmentSignupTabBinding
 
 

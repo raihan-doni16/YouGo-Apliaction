@@ -1,11 +1,12 @@
-package com.example.yougoapp
+package com.example.yougoapp.ui.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.yougoapp.R
 
-class PoseActivity : AppCompatActivity() {
+class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pose)
+        setContentView(R.layout.activity_user)
     }
 }

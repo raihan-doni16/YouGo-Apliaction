@@ -16,31 +16,31 @@
             android:name=".BenefitActivity"
             android:exported="false" />
         <activity
-            android:name=".LangkahActivity"
+            android:name=".ui.pose.LangkahActivity"
             android:exported="false" />
         <activity
-            android:name=".EditUserActivity"
+            android:name=".ui.profile.EditUserActivity"
             android:exported="false" />
         <activity
-            android:name=".UserActivity"
+            android:name=".ui.profile.UserActivity"
             android:exported="false" />
         <activity
-            android:name=".PoseActivity"
+            android:name=".ui.pose.PoseActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailArticleActivity"
+            android:name=".ui.artikel.DetailArticleActivity"
             android:exported="false" />
         <activity
-            android:name=".ArticleActivity"
+            android:name=".ui.artikel.ArticleActivity"
             android:exported="false" />
         <activity
-            android:name=".ResultActivity"
+            android:name=".ui.detection.ResultActivity"
             android:exported="false" />
         <activity
-            android:name=".CameraActivity"
+            android:name=".ui.detection.CameraActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
