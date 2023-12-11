@@ -1,39 +1,35 @@
 <resources>
     <string name="app_name">YouGo App</string>
-    <string name="tab_1">Login</string>
-    <string name="tab_2">Sign Up</string>
-    <string name="Explore">Explore</string>
-    <string name="recomendation_home">Rekomendasi</string>
-    <string name="article_home">Artikel Kebugaran</string>
-    <string name="pose_yoga">Pose Yoga by YouGo</string>
-    <string name="deteksi_pose">Deteksi Yoga Pose</string>
-    <string name="kamera">Kamera</string>
-    <string name="gallery">Gallery</string>
-    <string name="upload">Uploud</string>
-    <string name="search_home">Cari Pose dengan Gambar</string>
-    <string name="yougo_image">yougo_image</string>
-    <string name="preview">Preview</string>
-    <string name="back">Kembali</string>
-    <string name="gaya_pose">Jenis gaya pose yang digunakan :</string>
-    <string name="result">Hasil :</string>
-    <string name="imageview_camera">preview</string>
-    <string name="search_artikle">Cari Artikel Kebugaran</string>
-    <string name="artikle_terkini">Artikel Kebugaran Terkini</string>
-    <string name="search_pose">Cari Pose</string>
-    <string name="name_user">Nama</string>
-    <string name="nama_depan_user">Nama Depan</string>
-    <string name="nama_belakang_user">Nama Belakang</string>
-    <string name="email_user">Email</string>
-    <string name="berat_user">Berat</string>
-    <string name="tinggi_user">Tinggi</string>
-    <string name="umur_user">Umur</string>
-    <string name="nama_user">Clara</string>
-    <string name="simpan">SIMPAN</string>
-    <string name="keluar">Keluar</string>
-    <string name="_45">45</string>
-    <string name="email_edit_user">clara@gmail.com</string>
-    <string name="nama_pose">Child Pose</string>
 
-    <string name="Instruksi">Langkah</string>
+    <string name="home_navigation">home</string>
+    <string name="scan_nav">Scan</string>
+    <string name="pose_navigation">pose</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rekomendasi">Rekomendasi</string>
+    <string name="yogaImage">Yoga Image</string>
+    <string name="article_home">Article</string>
+    <string name="pose_rekomendasi">Yoga Pose</string>
+    <string name="search">Search Pose</string>
+    <string name="title_pose">Title Pose</string>
+    <string name="search_article">Search Article</string>
+    <string name="article_terkini">Latest Articles</string>
+    <string name="umur_user">22</string>
+    <string name="name_user">raihan</string>
+    <string name="tinggi_user">170</string>
+    <string name="wight_user">70</string>
+    <string name="logout">Log Out</string>
+    <string name="email">Email</string>
+    <string name="umur">Age</string>
+    <string name="berat">Weight</string>
+    <string name="tinggi">Weight</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="password_error">Password Error</string>
+    <string name="signup_link">SignUp</string>
+    <string name="signin_link">SignIn</string>
+    <string name="email_validation">Email Tidak Boleh Kosong</string>
+    <string name="password_validation">Password Tidak Boleh Kosong</string>
+>>>>>>> 6aa84c7d85a3fa5e8e57f9626e9763c127c0b580
 
 </resources>
