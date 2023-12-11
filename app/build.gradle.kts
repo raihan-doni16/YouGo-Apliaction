@@ -1,10 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-<<<<<<< HEAD
-    id ("kotlin-kapt")
-=======
->>>>>>> 6aa84c7d85a3fa5e8e57f9626e9763c127c0b580
+
 }
 
 android {
@@ -30,12 +27,6 @@ android {
             )
         }
     }
-<<<<<<< HEAD
-=======
-    buildFeatures {
-        viewBinding = true
-    }
->>>>>>> 6aa84c7d85a3fa5e8e57f9626e9763c127c0b580
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,12 +34,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-<<<<<<< HEAD
+
     buildFeatures {
         viewBinding = true
     }
-=======
->>>>>>> 6aa84c7d85a3fa5e8e57f9626e9763c127c0b580
+
 }
 
 dependencies {
@@ -57,16 +47,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-<<<<<<< HEAD
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
-    kapt ("com.github.bumptech.glide:compiler:4.12.0")
-
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
-=======
     // material design
     implementation ("com.google.android.material:material:1.3.0-alpha03")
     // circle Image
@@ -94,5 +75,5 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
->>>>>>> 6aa84c7d85a3fa5e8e57f9626e9763c127c0b580
+
 }
