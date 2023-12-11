@@ -12,45 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YouGoApp"
         tools:targetApi="31">
-        <activity
-            android:name=".BenefitActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.pose.LangkahActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.profile.EditUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.profile.UserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.pose.PoseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.artikel.DetailArticleActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.artikel.ArticleActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.detection.ResultActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.detection.CameraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
