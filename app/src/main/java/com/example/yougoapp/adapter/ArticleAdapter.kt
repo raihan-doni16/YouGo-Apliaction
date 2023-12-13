@@ -1,5 +1,6 @@
 package com.example.yougoapp.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +9,7 @@ import com.example.yougoapp.databinding.ItemArticleBinding
 import com.example.yougoapp.databinding.RekomendasiArticleBinding
 import com.example.yougoapp.response.ArticleItem
 import com.example.yougoapp.response.ArtikelItem
+import com.example.yougoapp.ui.article.DetailArticleActivity
 
 class ArticleAdapter( private  var article: List<ArtikelItem>):RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
@@ -18,6 +20,16 @@ class ArticleAdapter( private  var article: List<ArtikelItem>):RecyclerView.Adap
             binding.tvTitle.text = data.title
             Glide.with(itemView.context).load(data.imageUrl)
                 .into(binding.photoArticle)
+
+            binding.itemArticles.setOnClickListener {
+                val intent = Intent(itemView.context,DetailArticleActivity::class.java)
+                intent.putExtra(DetailArticleActivity.EXTRA_TITLE,data.title)
+                intent.putExtra(DetailArticleActivity.EXTRA_DESCRIPTION,data.description)
+                intent.putExtra(DetailArticleActivity.EXTRA_PHOTO,data.imageUrl)
+                intent.putExtra(DetailArticleActivity.EXTRA_UPDATE, data.updateAt)
+                intent.putExtra(DetailArticleActivity.EXTRA_CREATED, data.createdAt)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 
