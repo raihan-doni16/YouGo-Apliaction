@@ -15,12 +15,12 @@
 
     <item
         android:id="@+id/article_nav"
-        android:icon="@drawable/ic_article_nav"
-        android:title="@string/home_navigation"/>
+        android:icon="@drawable/baseline_calculate_24"
+        android:title="@string/bmi"/>
 
     <item
         android:id="@+id/profile_nav"
         android:icon="@drawable/ic_profile_nav"
-        android:title="@string/home_navigation"/>
+        android:title="@string/profile"/>
 
 </menu>

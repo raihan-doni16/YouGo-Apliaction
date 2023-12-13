@@ -4,6 +4,7 @@ import com.example.yougoapp.response.ArticleResponse
 import com.example.yougoapp.response.LoginResponse
 import com.example.yougoapp.response.PoseResponse
 import com.example.yougoapp.response.RegisterResponse
+import com.example.yougoapp.response.ResponseArticle
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
@@ -39,8 +40,11 @@ interface ApiService {
         @Field("height") height: String
     )
 
+
+
     @GET("articles")
-    fun getArticles(): ArticleResponse
+    suspend fun geArt(): ResponseArticle
+
 
     @GET("poses")
     suspend fun getPoses(): PoseResponse

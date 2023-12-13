@@ -33,14 +33,14 @@
             app:layout_constraintVertical_bias="0.023" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_history"
+            android:id="@+id/rv_pose"
             android:layout_width="0dp"
+            android:padding="2dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_history"
-            tools:listitem="@layout/item_pose" />
+            app:layout_constraintTop_toBottomOf="@id/search_history"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

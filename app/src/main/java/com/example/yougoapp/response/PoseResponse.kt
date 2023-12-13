@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class PoseResponse(
 
-    @field:SerializedName("poseItem")
-    val data: List<PoseItem?>? = null,
+    @field:SerializedName("pose")
+    val data: List<Data> = emptyList(),
 
     @field:SerializedName("status")
     val status: String? = null,
@@ -14,7 +14,7 @@ data class PoseResponse(
     val error: Boolean? = null,
 )
 
-data class PoseItem(
+data class Data(
 
     @field:SerializedName("imageUrl")
     val imageUrl: String? = null,

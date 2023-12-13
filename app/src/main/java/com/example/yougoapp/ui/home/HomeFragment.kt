@@ -1,60 +1,118 @@
 package com.example.yougoapp.ui.home
 
+
+
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.AnimationTypes
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.yougoapp.R
+import com.example.yougoapp.adapter.RecArtAdapter
+import com.example.yougoapp.adapter.RecPosAdapter
+import com.example.yougoapp.data.State
+import com.example.yougoapp.databinding.FragmentHomeBinding
+import com.example.yougoapp.factory.ViewModelFactory
+import com.example.yougoapp.ui.article.ArticleActivity
+import com.example.yougoapp.ui.pose.PoseFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var adapter: RecPosAdapter
+    private  lateinit var articleAdapter: RecArtAdapter
+    private val viewModel by viewModels<HomeViewModel> {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        ViewModelFactory.getInstance(requireContext())
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater)
+        val imageSlider: ImageSlider? = binding.imageYougo
+        binding.seeArticle.setOnClickListener {
+            val intent = Intent(requireContext(), ArticleActivity::class.java)
+            startActivity(intent)
+            true
+        }
+            binding.seePose.setOnClickListener {
+
+                val fragmentManager = requireActivity().supportFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                val newFragment = PoseFragment()
+                fragmentTransaction.replace(R.id.navHost, newFragment)
+                fragmentTransaction.commit()
+            }
+
+
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.poseYogaRecyclerView.layoutManager = layoutManager
+
+        val layout= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.articleKebugaranRecyclerView.layoutManager = layout
+
+        val imageList = ArrayList<SlideModel>()
+        imageList.add(SlideModel(R.drawable.home_yoga, "Yoga: Your path to inner strength and tranquility."))
+        imageList.add(SlideModel(R.drawable.home_yoga, "Embrace the journey of self-discovery through yoga"))
+        imageList.add(SlideModel(R.drawable.home_yoga, "Cultivate wellness and mindfulness through the art of yoga"))
+        imageSlider?.setImageList(imageList, ScaleTypes.CENTER_CROP)
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getPose().observe(viewLifecycleOwner) { data ->
+            if (data != null) {
+                when (data) {
+                    is State.Loading -> {
+
+                    }
+
+                    is State.Success -> {
+                        val pose = data.data
+                        adapter = RecPosAdapter(pose)
+                        binding.poseYogaRecyclerView.adapter = adapter
+                    }
+
+                    is State.Error -> {
+
+                    }
+
+                    else -> false
                 }
             }
+        }
+        viewModel.getArticle().observe(viewLifecycleOwner) { data ->
+            if (data != null) {
+                when (data) {
+                    is State.Loading -> {
+
+                    }
+
+                    is State.Success -> {
+                        val pose = data.data
+                        articleAdapter = RecArtAdapter(pose)
+                        binding.articleKebugaranRecyclerView.adapter = articleAdapter
+                    }
+
+                    is State.Error -> {
+
+                    }
+
+                    else -> false
+                }
+            }
+        }
     }
 }

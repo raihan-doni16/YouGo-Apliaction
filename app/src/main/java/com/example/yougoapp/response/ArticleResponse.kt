@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ArticleResponse(
 
-    @field:SerializedName("articleItem")
+    @field:SerializedName("artikel")
     val data: List<ArticleItem> = emptyList(),
 
     @field:SerializedName("status")

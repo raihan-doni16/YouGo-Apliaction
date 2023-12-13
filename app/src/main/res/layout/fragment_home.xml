@@ -1,102 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_fragment"
     tools:context=".ui.home.HomeFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
+        android:id="@+id/navHost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent"/>
 
-        <ImageView
-            android:id="@+id/image_yougo"
-            android:layout_width="417dp"
-            android:layout_height="248dp"
-            android:layout_gravity="top"
-            android:contentDescription="@string/yogaImage"
-            android:scaleType="centerCrop"
-            android:src="@drawable/home_yoga"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/rekomendasi"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/rekomendasi"
-            android:textColor="@color/darkgrey"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@+id/pose_yoga_recycler_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_yougo"
-            app:layout_constraintVertical_bias="0.0" />
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/artikel_kebugaran"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/article_home"
-            android:textColor="@color/lightblue"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/article_kebugaran_recycler_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rekomendasi" />
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/image_yougo"
+                android:layout_width="wrap_content"
+                android:layout_height="248dp"
+                android:src="@drawable/home_yoga"
+                app:iss_auto_cycle="true"
+                app:iss_period="2000"
+                app:iss_delay="1000"
+                app:iss_text_align="CENTER"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/article_kebugaran_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/pose_yoga"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/artikel_kebugaran"
-            app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
-            android:id="@+id/pose_yoga"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/pose_rekomendasi"
-            android:textColor="@color/lightblue"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.064"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/article_kebugaran_recycler_view" />
+            <TextView
+                android:id="@+id/rekomendasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/rekomendasi"
+                android:textColor="@color/darkgrey"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toTopOf="@+id/pose_yoga_recycler_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_yougo"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pose_yoga_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pose_yoga"
-            app:layout_constraintVertical_bias="0.0" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/artikel_kebugaran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/article_home"
+                android:textColor="@color/lightblue"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/article_kebugaran_recycler_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rekomendasi" />
 
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/article_kebugaran_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/pose_yoga"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artikel_kebugaran"
+                app:layout_constraintVertical_bias="1.0" />
 
+            <TextView
+                android:id="@+id/see_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/see_all"
+                android:textColor="@color/lightblue"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/pose_yoga_recycler_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/artikel_kebugaran"
+                app:layout_constraintTop_toBottomOf="@+id/image_yougo"
+                app:layout_constraintVertical_bias="0.156" />
+
+            <TextView
+                android:id="@+id/pose_yoga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/pose_rekomendasi"
+                android:textColor="@color/lightblue"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/article_kebugaran_recycler_view" />
+
+            <TextView
+                android:id="@+id/see_pose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/see_all"
+                android:textColor="@color/lightblue"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/pose_yoga_recycler_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.969"
+                app:layout_constraintStart_toEndOf="@+id/artikel_kebugaran"
+                app:layout_constraintTop_toBottomOf="@+id/rekomendasi"
+                app:layout_constraintVertical_bias="0.96" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pose_yoga_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pose_yoga"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>

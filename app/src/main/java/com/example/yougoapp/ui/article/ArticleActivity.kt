@@ -1,8 +1,12 @@
 package com.example.yougoapp.ui.article
 
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yougoapp.adapter.ArticleAdapter
 import com.example.yougoapp.data.State
@@ -21,11 +25,10 @@ class ArticleActivity : AppCompatActivity() {
         binding = ActivityArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val layoutManager = LinearLayoutManager(this)
+        val layoutManager = GridLayoutManager(this, 2)
         binding.gridRecyclerView.layoutManager = layoutManager
 
-        adapter = ArticleAdapter()
-        binding.gridRecyclerView.adapter = adapter
+
 
         viewModel.getArticle().observe(this){user ->
             when(user){
@@ -34,7 +37,8 @@ class ArticleActivity : AppCompatActivity() {
                 }
                 is State.Success ->{
                     val data = user.data
-                    adapter.submitList(data)
+                    adapter = ArticleAdapter(data)
+                    binding.gridRecyclerView.adapter = adapter
 
                 }
                 is State.Error->{
@@ -43,4 +47,5 @@ class ArticleActivity : AppCompatActivity() {
             }
         }
     }
+
 }

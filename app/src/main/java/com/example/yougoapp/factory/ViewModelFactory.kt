@@ -8,6 +8,7 @@ import com.example.yougoapp.repository.YogaRepository
 import com.example.yougoapp.ui.article.ArticleViewModel
 import com.example.yougoapp.ui.home.HomeViewModel
 import com.example.yougoapp.ui.login.LoginViewModel
+import com.example.yougoapp.ui.pose.PoseViewModel
 import com.example.yougoapp.ui.register.RegisterViewModel
 
 class ViewModelFactory(private val repository: YogaRepository) :
@@ -28,6 +29,8 @@ class ViewModelFactory(private val repository: YogaRepository) :
             modelClass.isAssignableFrom(ArticleViewModel::class.java)->{
                 ArticleViewModel(repository)as T
             }
+            modelClass.isAssignableFrom(PoseViewModel::class.java)->
+                PoseViewModel(repository) as T
             else -> throw IllegalArgumentException("Unknown ViewModel Class: "+ modelClass.name)
 
         }

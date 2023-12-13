@@ -5,10 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeActivity">
+
     <FrameLayout
         android:id="@+id/navHost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"/>
+
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomApp"

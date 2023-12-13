@@ -3,7 +3,7 @@
 
     <style name="Base.Theme.YouGoApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">#75C7EC</item>
+        <item name="colorPrimary">#75C7EC</item>
     </style>
 
 

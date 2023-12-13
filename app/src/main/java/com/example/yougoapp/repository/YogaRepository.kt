@@ -9,8 +9,12 @@ import com.example.yougoapp.data.YogaPreference
 import com.example.yougoapp.network.ApiConfig
 import com.example.yougoapp.network.ApiService
 import com.example.yougoapp.response.ArticleItem
+import com.example.yougoapp.response.ArtikelItem
+import com.example.yougoapp.response.Data
 import com.example.yougoapp.response.ErrorResponse
 import com.example.yougoapp.response.LoginResponse
+
+import com.example.yougoapp.response.PoseResponse
 import com.example.yougoapp.response.RegisterResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
@@ -77,47 +81,78 @@ class YogaRepository private constructor(
                 emit(State.Error(response.message ?: "Error"))
             }
         } catch (e: HttpException) {
-            // Handle HTTP exceptions (e.g., 404, 500, etc.)
-            Log.e("HTTP Exception", e.message(), e)
             emit(State.Error("Login failed: ${e.message()}"))
         } catch (e: IOException) {
-
-            Log.e("Network Exception", e.message, e)
             emit(State.Error("Network error: ${e.message}"))
         } catch (e: Exception) {
-            // Handle other exceptions
-            Log.e("Exception", e.message, e)
             emit(State.Error("An unexpected error occurred: ${e.message}"))
         }
     }
 
-    fun getArticles():LiveData<State<List<ArticleItem>>> = liveData {
+    fun getArticle(): LiveData<State<List<ArtikelItem>>> = liveData {
+        emit(State.Loading)
+
+        try {
+            val pref = runBlocking {
+                yogaPreference.getSession().first()
+            }
+            val response = ApiConfig.getApiService(pref.token)
+
+            val articleResponse = response.geArt()
+            Log.d("before map", "Before map operation")
+            val article = articleResponse.artikel
+            val nonNullableArticleList = article?.map { data ->
+                ArtikelItem(
+                    data?.createdAt,
+                    data?.imageUrl,
+                    data?.description,
+                    data?.updateAt,
+                    data?.id,
+                    data?.title
+                )
+            } ?: emptyList()
+
+            emit(State.Success(nonNullableArticleList))
+        }catch (e:HttpException){
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody?.message ?: "An error occurred"
+            emit(State.Error("Failed: $errorMessage"))
+        }catch (e: Exception){
+            emit(State.Error("Internet Issues"))
+        }catch (e: SocketTimeoutException){
+            emit(State.Error("Read timeout occurred"))
+        }
+
+    }
+    fun getPose(): LiveData<State<List<Data>>> = liveData {
         emit(State.Loading)
         try {
             val pref = runBlocking {
                 yogaPreference.getSession().first()
             }
-
-            val article = apiService.getArticles()
-            val articleList = article.data
-            val articleMap = articleList.map { data->
-                ArticleItem(
-                    data.createdAt,
-                    data.updateAt,
-                    data.title,
+            val response = ApiConfig.getApiService(pref.token)
+            val poseResponse = response.getPoses()
+            val pose = poseResponse.data
+            val poseList = pose.map { data ->
+                Data(
                     data.imageUrl,
-                    data.description,
-                    data.id
+                    data.id,
+                    data.title,
+                    data.time,
+                    data.step,
+                    data.category
                 )
             }
-            if (article.error==false){
-                emit(State.Success(articleMap))
-                Log.d("succes", articleMap.toString())
+            if(poseList.isEmpty()){
+                Log.d("Error", poseList.toString())
             }else{
-                emit(State.Success(articleMap))
-                Log.d("error",article.status.toString())
+                Log.d("success", poseList.toString())
             }
-        }catch (e : HttpException){
+
+
+            emit(State.Success(poseList))
+        } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
             val errorMessage = errorBody?.message ?: "An error occurred"

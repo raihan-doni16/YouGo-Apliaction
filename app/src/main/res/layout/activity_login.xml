@@ -70,7 +70,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
         android:alpha="0"
-        android:text="Belum punya akun ?"
+        android:text="@string/belum_punya_akun"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/login_button"

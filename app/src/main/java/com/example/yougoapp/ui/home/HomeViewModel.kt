@@ -8,10 +8,12 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: YogaRepository):ViewModel() {
     fun getSession() = repository.getSession().asLiveData()
-
+    fun getPose() = repository.getPose()
+    fun getArticle() = repository.getArticle()
     fun logout(){
         viewModelScope.launch {
             repository.logout()
         }
     }
+
 }
