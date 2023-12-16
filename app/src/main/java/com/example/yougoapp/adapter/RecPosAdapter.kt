@@ -5,13 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.yougoapp.databinding.ItemPoseBinding
+import com.example.yougoapp.databinding.RekomendasiArticleBinding
 import com.example.yougoapp.databinding.RekomendasiPoseBinding
 import com.example.yougoapp.response.Data
+import com.example.yougoapp.response.PoseItem
 
-class RecPosAdapter(private  var poseData: List<Data>): RecyclerView.Adapter<RecPosAdapter.RecPoseViewHolder>() {
+class RecPosAdapter(private  var poseData: List<PoseItem>): RecyclerView.Adapter<RecPosAdapter.RecPoseViewHolder>() {
     inner  class  RecPoseViewHolder(private  val binding: RekomendasiPoseBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: Data){
-            binding.tvItemName.text = data.title
+        fun bind(data: PoseItem){
+            binding.tvItemTitle.text = data.title
+//            binding.tvItemTime.text = data.time.toString()
             Glide.with(itemView.context).load(data.imageUrl)
                 .into(binding.tvItemPhoto)
         }

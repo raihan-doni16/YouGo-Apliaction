@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.yougoapp.data.Injection
 import com.example.yougoapp.repository.YogaRepository
 import com.example.yougoapp.ui.article.ArticleViewModel
+import com.example.yougoapp.ui.detection.DetectionViewModel
 import com.example.yougoapp.ui.home.HomeViewModel
 import com.example.yougoapp.ui.login.LoginViewModel
 import com.example.yougoapp.ui.pose.PoseViewModel
 import com.example.yougoapp.ui.register.RegisterViewModel
+import com.example.yougoapp.ui.splashscreen.ExploreViewModel
 
 class ViewModelFactory(private val repository: YogaRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -29,8 +31,18 @@ class ViewModelFactory(private val repository: YogaRepository) :
             modelClass.isAssignableFrom(ArticleViewModel::class.java)->{
                 ArticleViewModel(repository)as T
             }
-            modelClass.isAssignableFrom(PoseViewModel::class.java)->
+            modelClass.isAssignableFrom(PoseViewModel::class.java)->{
                 PoseViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ExploreViewModel::class.java)->{
+                ExploreViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(PoseViewModel::class.java)->{
+                PoseViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DetectionViewModel::class.java)->{
+                DetectionViewModel(repository)as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel Class: "+ modelClass.name)
 
         }

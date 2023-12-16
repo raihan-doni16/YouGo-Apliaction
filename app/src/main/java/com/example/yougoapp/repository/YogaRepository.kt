@@ -11,8 +11,10 @@ import com.example.yougoapp.network.ApiService
 import com.example.yougoapp.response.ArticleItem
 import com.example.yougoapp.response.ArtikelItem
 import com.example.yougoapp.response.Data
+import com.example.yougoapp.response.DetectionResponse
 import com.example.yougoapp.response.ErrorResponse
 import com.example.yougoapp.response.LoginResponse
+import com.example.yougoapp.response.PoseItem
 
 import com.example.yougoapp.response.PoseResponse
 import com.example.yougoapp.response.RegisterResponse
@@ -20,7 +22,12 @@ import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
+import java.io.File
 import java.io.IOException
 import java.net.SocketTimeoutException
 
@@ -89,6 +96,30 @@ class YogaRepository private constructor(
         }
     }
 
+    fun detection(id: String, image: File): LiveData<State<DetectionResponse>> = liveData{
+        emit(State.Loading)
+
+        val requestPhotoFile = image.asRequestBody("image/jpeg".toMediaType())
+        val multipartBody = MultipartBody.Part.createFormData("photo", image.name, requestPhotoFile)
+
+        try {
+            val pref = yogaPreference.getSession().first()
+            val response = ApiConfig.getApiService(pref.token)
+            val success = response.checkMyPose(id, multipartBody)
+            Log.d("cek", success.status)
+            emit(State.Success(success))
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val errorResponse = Gson().fromJson(errorBody, DetectionResponse::class.java)
+            emit(State.Error("Error: ${errorResponse.status}"))
+            // Log the actual exception for debugging purposes
+            Log.e("detection", "HttpException occurred", e)
+        } catch (e: Exception) {
+            emit(State.Error("Unknown error occurred"))
+            // Log the actual exception for debugging purposes
+            Log.e("detection", "Exception occurred", e)
+        }
+    }
     fun getArticle(): LiveData<State<List<ArtikelItem>>> = liveData {
         emit(State.Loading)
 
@@ -125,7 +156,7 @@ class YogaRepository private constructor(
         }
 
     }
-    fun getPose(): LiveData<State<List<Data>>> = liveData {
+    fun getPose(): LiveData<State<List<PoseItem>>> = liveData {
         emit(State.Loading)
         try {
             val pref = runBlocking {
@@ -133,14 +164,12 @@ class YogaRepository private constructor(
             }
             val response = ApiConfig.getApiService(pref.token)
             val poseResponse = response.getPoses()
-            val pose = poseResponse.data
+            val pose = poseResponse.pose
             val poseList = pose.map { data ->
-                Data(
+                PoseItem(
                     data.imageUrl,
                     data.id,
                     data.title,
-                    data.time,
-                    data.step,
                     data.category
                 )
             }

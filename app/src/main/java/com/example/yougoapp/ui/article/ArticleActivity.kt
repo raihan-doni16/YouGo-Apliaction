@@ -1,23 +1,26 @@
 package com.example.yougoapp.ui.article
 
-import android.os.Build
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.yougoapp.R
 import com.example.yougoapp.adapter.ArticleAdapter
 import com.example.yougoapp.data.State
 import com.example.yougoapp.databinding.ActivityArticleBinding
 import com.example.yougoapp.factory.ViewModelFactory
+import com.example.yougoapp.response.ArtikelItem
+import retrofit2.http.Query
+import java.util.Locale
 
 class ArticleActivity : AppCompatActivity() {
 
     private  val  viewModel by viewModels<ArticleViewModel> {
         ViewModelFactory.getInstance(this)
     }
+    private  lateinit var searchView: SearchView
     private  lateinit var  adapter: ArticleAdapter
     private  lateinit var  binding: ActivityArticleBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +31,21 @@ class ArticleActivity : AppCompatActivity() {
         val layoutManager = GridLayoutManager(this, 2)
         binding.gridRecyclerView.layoutManager = layoutManager
 
+        adapter = ArticleAdapter(emptyList())
+        binding.gridRecyclerView.adapter = adapter
 
+        searchView = findViewById(R.id.search_artikel)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
+        })
         viewModel.getArticle().observe(this){user ->
             when(user){
                 is State.Loading ->{
@@ -37,8 +53,8 @@ class ArticleActivity : AppCompatActivity() {
                 }
                 is State.Success ->{
                     val data = user.data
-                    adapter = ArticleAdapter(data)
-                    binding.gridRecyclerView.adapter = adapter
+                    adapter.setData(data)
+
 
                 }
                 is State.Error->{
@@ -47,5 +63,6 @@ class ArticleActivity : AppCompatActivity() {
             }
         }
     }
+
 
 }

@@ -25,7 +25,7 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://yougoappapi-dot-serene-sentinel-401201.et.r.appspot.com/")
+                .baseUrl("http://34.101.135.169/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

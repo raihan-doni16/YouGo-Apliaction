@@ -33,5 +33,5 @@ data class ArticleItem(
     val id: String? = null,
 
     @field:SerializedName("title")
-    val title: String? = null
+    val title: String
 )

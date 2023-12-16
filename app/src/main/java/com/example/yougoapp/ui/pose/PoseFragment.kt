@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.example.yougoapp.factory.ViewModelFactory
 class PoseFragment : Fragment() {
     private lateinit var binding: PoseFragmentBinding
     private lateinit var adapter: PoseAdapter
+    private  lateinit var searchView: SearchView
     private val viewModel by viewModels<PoseViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -30,6 +32,22 @@ class PoseFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvPose.layoutManager = layoutManager
+        adapter = PoseAdapter(emptyList())
+        binding.rvPose.adapter =adapter
+        searchView = binding.searchPose
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+               return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
+        })
+
         return binding.root
     }
 
@@ -44,8 +62,8 @@ class PoseFragment : Fragment() {
 
                     is State.Success -> {
                         val pose = data.data
-                        adapter = PoseAdapter(pose)
-                        binding.rvPose.adapter = adapter
+                        adapter.setData(pose)
+
                     }
                     is State.Error ->{
 

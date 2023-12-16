@@ -27,8 +27,10 @@ class DetectionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetectionBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
-
+    private  var imageUri: Uri? = null
+    private var idUser =""
     companion object {
+        const val EXTRA_ID = "extraId"
         private const val TAG = "CameraActivity"
         const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
         const val CAMERAX_RESULT = 200
@@ -48,9 +50,12 @@ class DetectionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val id = intent.getStringExtra(EXTRA_ID)
+        idUser = id ?:""
         if (!allPermissionGranted()){
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
+
         binding.switchCamera.setOnClickListener {
             cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_FRONT_CAMERA) {
                 CameraSelector.DEFAULT_BACK_CAMERA
@@ -58,7 +63,7 @@ class DetectionActivity : AppCompatActivity() {
                 CameraSelector.DEFAULT_FRONT_CAMERA
             }
             startCamera()
-
+            id
         }
         binding.captureImage.setOnClickListener { takePhoto() }
         binding.gallery.setOnClickListener {
@@ -71,8 +76,14 @@ class DetectionActivity : AppCompatActivity() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
 
     }
-    private  val launcherGallery = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){uri: Uri?->
-
+    private val launcherGallery = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
+        if (uri != null) {
+            imageUri = uri
+            val intent = Intent(this, StateActivity::class.java)
+            intent.putExtra(StateActivity.EXTRA_IMAGE, imageUri.toString())
+            intent.putExtra(StateActivity.ID_EXTRA,idUser)
+            startActivity(intent)
+        }
     }
 
     public override fun onResume() {
@@ -116,7 +127,11 @@ class DetectionActivity : AppCompatActivity() {
                     val intent = Intent()
                     intent.putExtra(EXTRA_CAMERAX_IMAGE, outputFileResults.savedUri.toString())
                     setResult(CAMERAX_RESULT, intent)
+                    launchStateActivity(outputFileResults.savedUri)
+
                     finish()
+
+
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -164,6 +179,17 @@ class DetectionActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         orientationEventListener.disable()
+    }
+    private fun launchStateActivity(savedUri: Uri?) {
+        savedUri?.let { uri ->
+            val intent = Intent(this, StateActivity::class.java)
+            intent.putExtra(StateActivity.EXTRA_IMAGE, uri.toString())
+            intent.putExtra(StateActivity.ID_EXTRA, idUser)
+            startActivity(intent)
+        } ?: run {
+
+            Toast.makeText(this, "Error: Image URI is null", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

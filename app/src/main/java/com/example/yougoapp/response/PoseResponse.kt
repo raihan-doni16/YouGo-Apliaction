@@ -17,20 +17,20 @@ data class PoseResponse(
 data class Data(
 
     @field:SerializedName("imageUrl")
-    val imageUrl: String? = null,
+    val imageUrl: String,
 
     @field:SerializedName("step")
-    val step: String? = null,
+    val step: String,
 
     @field:SerializedName("id")
-    val id: String? = null,
+    val id: String,
 
     @field:SerializedName("time")
-    val time: Int? = null,
+    val time: Int,
 
     @field:SerializedName("title")
-    val title: String? = null,
+    val title: String,
 
     @field:SerializedName("category")
-    val category: String? = null
+    val category: String
 )
