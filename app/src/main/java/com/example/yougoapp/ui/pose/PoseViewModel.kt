@@ -5,4 +5,5 @@ import com.example.yougoapp.repository.YogaRepository
 
 class PoseViewModel(private  val repository: YogaRepository):ViewModel() {
     fun getPose() = repository.getPose()
+    fun detailPose(id: String) = repository.getDetailPose(id)
 }

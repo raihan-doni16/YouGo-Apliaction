@@ -101,6 +101,15 @@
     <string name="desc">Revolutionizing Home Yoga Practice</string>
     <string name="stop">Stop</string>
     <string name="play">Play</string>
-    >>>>>>> 6aa84c7d85a3fa5e8e57f9626e9763c127c0b580
+    <string name="save">Save</string>
+    <string name="weightx">Weight</string>
+    <string name="first_name">first Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="start">Start</string>
+    <string name="step">step</string>
+    <string name="time">10.00</string>
+    <string name="pause">pause</string>
+    <string name="your_result">Your Result</string>
+
 
 </resources>

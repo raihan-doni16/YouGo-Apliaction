@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.OrientationEventListener
 import android.view.Surface
 import android.view.WindowInsets
@@ -51,6 +52,7 @@ class DetectionActivity : AppCompatActivity() {
         binding = ActivityDetectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val id = intent.getStringExtra(EXTRA_ID)
+        Log.d("cek detection",id?:"")
         idUser = id ?:""
         if (!allPermissionGranted()){
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)

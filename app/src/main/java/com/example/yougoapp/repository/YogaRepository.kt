@@ -11,13 +11,17 @@ import com.example.yougoapp.network.ApiService
 import com.example.yougoapp.response.ArticleItem
 import com.example.yougoapp.response.ArtikelItem
 import com.example.yougoapp.response.Data
+import com.example.yougoapp.response.DetailResponse
 import com.example.yougoapp.response.DetectionResponse
 import com.example.yougoapp.response.ErrorResponse
 import com.example.yougoapp.response.LoginResponse
 import com.example.yougoapp.response.PoseItem
 
 import com.example.yougoapp.response.PoseResponse
+import com.example.yougoapp.response.Profile
+import com.example.yougoapp.response.ProfileResponse
 import com.example.yougoapp.response.RegisterResponse
+import com.example.yougoapp.response.UserProfile
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -96,11 +100,13 @@ class YogaRepository private constructor(
         }
     }
 
-    fun detection(id: String, image: File): LiveData<State<DetectionResponse>> = liveData{
+    fun detection(id: String, image: File): LiveData<State<DetectionResponse>> = liveData {
         emit(State.Loading)
 
         val requestPhotoFile = image.asRequestBody("image/jpeg".toMediaType())
-        val multipartBody = MultipartBody.Part.createFormData("photo", image.name, requestPhotoFile)
+        val multipartBody = MultipartBody.Part.createFormData("image", image.name, requestPhotoFile)
+
+
 
         try {
             val pref = yogaPreference.getSession().first()
@@ -112,14 +118,69 @@ class YogaRepository private constructor(
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, DetectionResponse::class.java)
             emit(State.Error("Error: ${errorResponse.status}"))
-            // Log the actual exception for debugging purposes
+
             Log.e("detection", "HttpException occurred", e)
         } catch (e: Exception) {
+
+            Log.e("detection", "Request Payload: $requestPhotoFile")
+            val errorBody = e.localizedMessage
+
+            Log.e("detection", "Response Body: $errorBody")
             emit(State.Error("Unknown error occurred"))
-            // Log the actual exception for debugging purposes
             Log.e("detection", "Exception occurred", e)
         }
     }
+    fun postProfile( email: String,firstName: String, lastName: String, age: String, weight: String,  height: String,image: File): LiveData<State<ProfileResponse>> = liveData {
+        emit(State.Loading)
+        try {
+            val requestFile = image.asRequestBody("image/jpeg".toMediaType())
+            val photoPart = MultipartBody.Part.createFormData("imageUrl", image.name, requestFile)
+            val pref = yogaPreference.getSession().first()
+            val response = ApiConfig.getApiService(pref.token)
+            Log.d("cek", pref.userId)
+            val post = response.postPro(pref.userId,email,firstName,lastName,age,weight,height,photoPart)
+            emit(State.Success(post))
+        }catch (e: HttpException){
+            emit(State.Error("Login failed: ${e.message()}"))
+        } catch (e: IOException) {
+            emit(State.Error("Network error: ${e.message}"))
+        } catch (e: Exception) {
+            emit(State.Error("An unexpected error occurred: ${e.message}"))
+        }
+    }
+    fun getDetailPose(id: String): LiveData<State<DetailResponse>> = liveData {
+        emit(State.Loading)
+        try {
+            val pref = yogaPreference.getSession().first()
+            val response = ApiConfig.getApiService(pref.token)
+            val detail = response.getDetailPose(id)
+            emit(State.Success(detail))
+        }catch (e: HttpException){
+            emit(State.Error("Login failed: ${e.message()}"))
+        } catch (e: IOException) {
+            emit(State.Error("Network error: ${e.message}"))
+        } catch (e: Exception) {
+            emit(State.Error("An unexpected error occurred: ${e.message}"))
+        }
+    }
+    fun updateProfile(email: String,firstName: String, lastName: String, age: String, weight: String, image: File, height: String): LiveData<State<ProfileResponse>> = liveData {
+        emit(State.Loading)
+        try {
+            val requestPhotoFile = image.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = MultipartBody.Part.createFormData("photo", image.name, requestPhotoFile)
+            val pref = yogaPreference.getSession().first()
+            val response = ApiConfig.getApiService(pref.token)
+            val post = response.postProfile(pref.userId,email,firstName,lastName,age,weight,height,multipartBody)
+            emit(State.Success(post))
+        }catch (e: HttpException){
+            emit(State.Error("Login failed: ${e.message()}"))
+        } catch (e: IOException) {
+            emit(State.Error("Network error: ${e.message}"))
+        } catch (e: Exception) {
+            emit(State.Error("An unexpected error occurred: ${e.message}"))
+        }
+    }
+
     fun getArticle(): LiveData<State<List<ArtikelItem>>> = liveData {
         emit(State.Loading)
 
@@ -139,7 +200,9 @@ class YogaRepository private constructor(
                     data?.description,
                     data?.updateAt,
                     data?.id,
+                    data?.webUrl,
                     data?.title
+
                 )
             } ?: emptyList()
 
@@ -156,6 +219,29 @@ class YogaRepository private constructor(
         }
 
     }
+    fun getProfile(): LiveData<State<UserProfile>> = liveData {
+        emit(State.Loading)
+        try {
+            val preference = runBlocking {
+                yogaPreference.getSession().first()
+            }
+            val response = ApiConfig.getApiService(preference.token)
+            val profileResponse = response.getProfile()
+            val profile = profileResponse.userProfile
+            emit(State.Success(profile))
+        }catch (e: HttpException){
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody?.message ?: "An error occurred"
+            emit(State.Error("Failed: $errorMessage"))
+        }catch (e: Exception){
+            emit(State.Error("Internet Issues"))
+        }catch (e: SocketTimeoutException){
+            emit(State.Error("Read timeout occurred"))
+        }
+
+    }
+
     fun getPose(): LiveData<State<List<PoseItem>>> = liveData {
         emit(State.Loading)
         try {

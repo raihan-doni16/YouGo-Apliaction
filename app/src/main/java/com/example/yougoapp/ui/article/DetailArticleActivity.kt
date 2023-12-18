@@ -9,11 +9,12 @@ import com.example.yougoapp.databinding.ActivityDetailArticleBinding
 
 class DetailArticleActivity : AppCompatActivity() {
     companion object{
-        val EXTRA_PHOTO = "extraPhoto"
-        val EXTRA_TITLE = "extraName"
-        val EXTRA_DESCRIPTION = "extraDescription"
-        val EXTRA_CREATED ="extraCreated"
-        val EXTRA_UPDATE ="extraUpdate"
+        const val EXTRA_PHOTO = "extraPhoto"
+        const val EXTRA_TITLE = "extraName"
+        const val EXTRA_DESCRIPTION = "extraDescription"
+        const val EXTRA_CREATED ="extraCreated"
+        const val EXTRA_UPDATE ="extraUpdate"
+        const val EXTRA_WEB_URL = "extraWebUrl"
     }
     private lateinit var binding: ActivityDetailArticleBinding
     private lateinit var  webView : WebView
@@ -26,10 +27,11 @@ class DetailArticleActivity : AppCompatActivity() {
         val photo = intent.getStringExtra(EXTRA_PHOTO)
         val created =intent.getStringExtra(EXTRA_CREATED)
         val  update = intent.getStringExtra(EXTRA_UPDATE)
+        val web = intent.getStringExtra(EXTRA_WEB_URL)
 
         webView = findViewById(R.id.web_view)
         webView.webViewClient = WebViewClient()
-        webView.loadUrl("https://raihan-doni16.github.io/")
+        webView.loadUrl(web?:"")
 
         val webSettings = webView.settings
         webSettings.javaScriptEnabled = true

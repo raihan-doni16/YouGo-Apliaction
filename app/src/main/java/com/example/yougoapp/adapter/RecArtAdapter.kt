@@ -25,6 +25,7 @@ class RecArtAdapter ( private  var article: List<ArtikelItem>):RecyclerView.Adap
                 intent.putExtra(DetailArticleActivity.EXTRA_DESCRIPTION,data.description)
                 intent.putExtra(DetailArticleActivity.EXTRA_PHOTO,data.imageUrl)
                 intent.putExtra(DetailArticleActivity.EXTRA_UPDATE, data.updateAt)
+                intent.putExtra(DetailArticleActivity.EXTRA_WEB_URL,data.webUrl)
                 intent.putExtra(DetailArticleActivity.EXTRA_CREATED, data.createdAt)
                 itemView.context.startActivity(intent)
             }

@@ -28,6 +28,9 @@ import com.google.gson.annotations.SerializedName
 	@field:SerializedName("id")
 	val id: String? = null,
 
+	@field:SerializedName("webUrl")
+	val webUrl: String ?= null,
+
 	@field:SerializedName("title")
 	val title: String? = null
 )

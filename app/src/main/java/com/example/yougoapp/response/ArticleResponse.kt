@@ -32,6 +32,9 @@ data class ArticleItem(
     @field:SerializedName("id")
     val id: String? = null,
 
+    @field:SerializedName("webUrl")
+    val webUrl: String ,
+
     @field:SerializedName("title")
     val title: String
 )

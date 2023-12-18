@@ -10,6 +10,7 @@ import com.example.yougoapp.ui.detection.DetectionViewModel
 import com.example.yougoapp.ui.home.HomeViewModel
 import com.example.yougoapp.ui.login.LoginViewModel
 import com.example.yougoapp.ui.pose.PoseViewModel
+import com.example.yougoapp.ui.profile.ProfileViewModel
 import com.example.yougoapp.ui.register.RegisterViewModel
 import com.example.yougoapp.ui.splashscreen.ExploreViewModel
 
@@ -42,6 +43,9 @@ class ViewModelFactory(private val repository: YogaRepository) :
             }
             modelClass.isAssignableFrom(DetectionViewModel::class.java)->{
                 DetectionViewModel(repository)as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java)->{
+                ProfileViewModel(repository)as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel Class: "+ modelClass.name)
 

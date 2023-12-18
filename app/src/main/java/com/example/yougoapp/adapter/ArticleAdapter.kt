@@ -26,6 +26,7 @@ class ArticleAdapter(private var article: List<ArtikelItem>) :
 
         fun bind(data: ArtikelItem) {
             binding.tvTitle.text = data.title
+
             Glide.with(itemView.context).load(data.imageUrl)
                 .into(binding.photoArticle)
 
@@ -35,6 +36,7 @@ class ArticleAdapter(private var article: List<ArtikelItem>) :
                 intent.putExtra(DetailArticleActivity.EXTRA_DESCRIPTION, data.description)
                 intent.putExtra(DetailArticleActivity.EXTRA_PHOTO, data.imageUrl)
                 intent.putExtra(DetailArticleActivity.EXTRA_UPDATE, data.updateAt)
+                intent.putExtra(DetailArticleActivity.EXTRA_WEB_URL, data.webUrl)
                 intent.putExtra(DetailArticleActivity.EXTRA_CREATED, data.createdAt)
                 itemView.context.startActivity(intent)
             }

@@ -31,6 +31,7 @@ class StateActivity : AppCompatActivity() {
         binding = ActivityStateBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val id= intent.getStringExtra(ID_EXTRA)
+        Log.d("cek state",id?:"")
         imageUri = intent?.getStringExtra(EXTRA_IMAGE)?.let { Uri.parse(it) }
         Log.d("image",imageUri.toString())
         showImage()
@@ -45,14 +46,23 @@ class StateActivity : AppCompatActivity() {
 
                             }
                             is State.Success ->{
-                                val intent= Intent(this, DetailPoseActivity::class.java)
+                                val poseName  = data.data.pose.yogaPose
+                                val akurasi = data.data.pose.confidence
+                                val  iscorrect = data.data.pose.isCorrectPose
+
+                                val intent= Intent(this, ResultActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                intent.putExtra(ResultActivity.EXTRA_NAME,poseName)
+                                intent.putExtra(ResultActivity.EXTRA_AKURASI,akurasi)
+                                intent.putExtra(ResultActivity.EXTRA_ISCORRECT,iscorrect)
+                                intent.putExtra(ResultActivity.EXTRA_IMAGE, imageFile.toString())
                                 startActivity(intent)
                                 finish()
                             }
                             is State.Error ->{
                                 Toast.makeText(this,"ERROR", Toast.LENGTH_LONG).show()
                             }
+                            else -> false
                         }
                     }
                 }

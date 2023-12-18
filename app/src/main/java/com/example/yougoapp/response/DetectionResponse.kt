@@ -14,8 +14,8 @@ class Pose(
     @field:SerializedName("yoga_pose")
     val yogaPose: String,
     @field:SerializedName("isCorrectPose")
-    val confidence: Any,
+    val isCorrectPose : Boolean,
     @field:SerializedName("confidence")
-    val isCorrectPose: Boolean
+    val confidence: Double
 )
 

@@ -1,9 +1,11 @@
 package com.example.yougoapp.network
 
 import com.example.yougoapp.response.ArticleResponse
+import com.example.yougoapp.response.DetailResponse
 import com.example.yougoapp.response.DetectionResponse
 import com.example.yougoapp.response.LoginResponse
 import com.example.yougoapp.response.PoseResponse
+import com.example.yougoapp.response.ProfileResponse
 import com.example.yougoapp.response.RegisterResponse
 import com.example.yougoapp.response.ResponseArticle
 import com.example.yougoapp.response.ResponsePose
@@ -15,6 +17,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 
@@ -35,21 +38,55 @@ interface ApiService {
         @Field("password") password: String
     ): LoginResponse
 
-    @FormUrlEncoded
+    @Multipart
     @POST("profile")
-    suspend fun pushProfile(
-        @Field("firstName") firstName: String,
-        @Field("lastName") lastName: String,
-        @Field("email") email: String,
-        @Field("age") age: String,
-        @Field("weight") weight: String,
-        @Field("height") height: String
-    )
+    suspend fun postProfile(
+        @Part("id") id: String,
+        @Part("email") email: String,
+        @Part("firstName") firstName: String,
+        @Part("lastName") lastName: String,
+        @Part("age") age: String,
+        @Part("weight") weight: String,
+        @Part("height") height: String,
+        @Part image: MultipartBody.Part
+    ): ProfileResponse
+
+    @Multipart
+    @POST("profile")
+    suspend fun  postPro(
+        @Part("id") id: String,
+        @Part("email") email: String,
+        @Part("firstName") firstName: String,
+        @Part("lastName") lastName: String,
+        @Part("age") age: String,
+        @Part("weight") weight: String,
+        @Part("height") height: String,
+        @Part image: MultipartBody.Part
+    ): ProfileResponse
+    @Multipart
+    @PUT("profile")
+    suspend fun putProfile(
+        @Part("id") id: String,
+        @Part("email") email: String,
+        @Part("firstName") firstName: String,
+        @Part("lastName") lastName: String,
+        @Part("age") age: String,
+        @Part("weight") weight: String,
+        @Part("height") height: String,
+        @Part image: MultipartBody.Part
+    ): ProfileResponse
+
+    @GET("profile")
+    suspend fun getProfile(): ProfileResponse
+
+    @PUT("profile")
+    suspend fun updateProfile(): ProfileResponse
+
     @Multipart
     @POST("checkMyPose/{id}")
     suspend fun checkMyPose(
         @Path("id") id: String,
-        @Part photo: MultipartBody.Part
+        @Part image: MultipartBody.Part
     ): DetectionResponse
 
 
@@ -59,4 +96,7 @@ interface ApiService {
 
     @GET("poses")
     suspend fun getPoses(): ResponsePose
+    @GET("poses/{id}")
+    suspend fun getDetailPose(@Path("id")id:String): DetailResponse
+
 }
