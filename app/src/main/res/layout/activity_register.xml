@@ -78,37 +78,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5" />
-    <TextView
-        android:id="@+id/tvSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="16dp"
-        android:text="Sudah Registrasi ?"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:alpha="0"
-        tools:alpha="100"
-        app:layout_constraintStart_toStartOf="@id/signup_button"
-        app:layout_constraintTop_toBottomOf="@id/signup_button" />
 
-    <TextView
-        android:id="@+id/textSignIn"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/signin_link"
-        android:textColor="@android:color/holo_blue_light"
-        android:textSize="16sp"
-        android:alpha="0"
-        tools:alpha="100"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/tvSignIn"
-        app:layout_constraintTop_toTopOf="@id/tvSignIn"
-        app:layout_constraintTop_toBottomOf="@id/signup_button"
-        app:layout_constraintVertical_bias="0.0" />
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/signup_button"
+        app:layout_constraintTop_toBottomOf="@id/signup_button">
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sudah_login" />
+
+        <TextView
+            android:id="@+id/textSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="@string/login"
+            android:textColor="@color/lightblue"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

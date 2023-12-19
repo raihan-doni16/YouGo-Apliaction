@@ -96,6 +96,8 @@
     <string name="profile">Profile</string>
     <string name="do50">50</string>
     <string name="_20">20</string>
-    >>>>>>> 6aa84c7d85a3fa5e8e57f9626e9763c127c0b580
+    <string name="dont_have_an_account">Belum memiliki akun ?</string>
+    <string name="sudah_login">Sudah memiliki akun ?</string>
+
 
 </resources>
