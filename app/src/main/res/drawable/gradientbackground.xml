@@ -5,4 +5,9 @@
         android:endColor="@color/lightblue"
         />
 
+    <corners
+        android:bottomLeftRadius="11dp"
+        android:bottomRightRadius="11dp">
+    </corners>
+
 </shape>
