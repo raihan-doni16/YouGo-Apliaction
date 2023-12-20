@@ -45,9 +45,9 @@ class ProfileFragment : Fragment() {
                         val lastName = prof.data.profile.lastName
                         binding.tvName.text = "$firstName  $lastName"
 
-                        binding.edBerat.text = prof.data.profile.weight
+                        binding.edBerat.text= prof.data.profile.weight.toString()
                         binding.edBmi.text = prof.data.profile.status
-                        binding.edUmur.text = prof.data.profile.age
+                        binding.edUmur.text = prof.data.profile.age.toString()
                         binding.edEmail.text = prof.data.email
                         Glide.with(requireContext()).load(prof.data.profile.imageUrl)
                             .into(binding.circleImageView)

@@ -67,7 +67,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:paddingLeft="40dp"
-                android:text="@string/first_name" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -89,7 +89,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:paddingLeft="40dp"
-                android:text="@string/last_name" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,7 +111,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:paddingLeft="40dp"
-                android:text="@string/email" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -133,7 +133,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:paddingLeft="40dp"
-                android:text="@string/age" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -155,7 +155,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:paddingLeft="40dp"
-                android:text="@string/weightx" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -172,12 +172,12 @@
 
             <EditText
                 android:id="@+id/ed_tinggi"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:paddingLeft="40dp"
-                android:text="@string/height" />
+                android:text="" />
         </LinearLayout>
 
 

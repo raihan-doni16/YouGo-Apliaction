@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.example.yougoapp.R
 import com.example.yougoapp.data.State
 import com.example.yougoapp.data.UserData
@@ -20,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> {
         ViewModelFactory.getInstance(this)
     }
+    private  lateinit var progressBar: ProgressBar
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,8 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
+        progressBar = binding.spinKit
+        progressBar.isVisible = false
         setUp()
         actionLogin()
     }
@@ -66,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                     if (user != null) {
                         when (user) {
                             is State.Loading -> {
-
+                                progressBar.isVisible = true
                             }
 
                             is State.Success -> {

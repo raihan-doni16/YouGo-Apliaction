@@ -54,6 +54,8 @@ dependencies {
     // circle Image
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+//    spinKit
+    implementation ("com.github.ybq:Android-SpinKit:1.4.0")
 
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -76,6 +78,10 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
 
+
+    // t -to s
+    implementation ("com.google.android.gms:play-services-tasks:17.2.1")
+    implementation ("com.google.android.gms:play-services-vision:20.1.3")
     implementation("androidx.camera:camera-camera2:1.2.3")
     implementation("androidx.camera:camera-lifecycle:1.2.3")
     implementation("androidx.camera:camera-view:1.2.3")

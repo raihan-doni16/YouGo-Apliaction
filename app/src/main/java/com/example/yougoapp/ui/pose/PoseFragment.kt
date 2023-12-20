@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.example.yougoapp.factory.ViewModelFactory
 
 
 class PoseFragment : Fragment() {
+    private  lateinit var  progressBar: ProgressBar
     private lateinit var binding: PoseFragmentBinding
     private lateinit var adapter: PoseAdapter
     private  lateinit var searchView: SearchView
@@ -29,7 +32,8 @@ class PoseFragment : Fragment() {
 
         binding = PoseFragmentBinding.inflate(inflater)
 
-
+             progressBar = binding.spinKit
+        progressBar.isVisible =true
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvPose.layoutManager = layoutManager
         adapter = PoseAdapter(emptyList())
@@ -57,7 +61,7 @@ class PoseFragment : Fragment() {
             if (data != null) {
                 when (data) {
                     is State.Loading -> {
-
+                        progressBar.isVisible = false
                     }
 
                     is State.Success -> {

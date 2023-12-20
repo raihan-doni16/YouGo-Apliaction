@@ -28,7 +28,7 @@ class PoseAdapter(private var poseData: List<PoseItem>) :
         fun bind(data: PoseItem) {
 
             binding.tvItemTitle.text = data.title
-//            binding.tvItemTime.text = data.time.toString()
+            binding.tvItemTime.text = data.title
             Glide.with(itemView.context).load(data.imageUrl)
                 .into(binding.tvItemPhoto)
             binding.itemLayout.setOnClickListener {

@@ -70,7 +70,7 @@ interface ApiService {
         @Part("email") email: String,
         @Part("firstName") firstName: String,
         @Part("lastName") lastName: String,
-        @Part("age") age: String,
+        @Part("age") age: Int,
         @Part("weight") weight: String,
         @Part("height") height: String,
         @Part image: MultipartBody.Part
@@ -79,8 +79,7 @@ interface ApiService {
     @GET("profile")
     suspend fun getProfile(): ProfileResponse
 
-    @PUT("profile")
-    suspend fun updateProfile(): ProfileResponse
+
 
     @Multipart
     @POST("checkMyPose/{id}")

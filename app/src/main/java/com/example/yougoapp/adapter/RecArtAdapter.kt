@@ -16,9 +16,9 @@ class RecArtAdapter ( private  var article: List<ArtikelItem>):RecyclerView.Adap
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: ArtikelItem) {
-            binding.tvTitle .text = data.title
+            binding.textView .text = data.title
             Glide.with(itemView.context).load(data.imageUrl)
-                .into(binding.photoArticle)
+                .into(binding.imageView)
             binding.itemLayout.setOnClickListener {
                 val intent = Intent(itemView.context, DetailArticleActivity::class.java)
                 intent.putExtra(DetailArticleActivity.EXTRA_TITLE,data.title)

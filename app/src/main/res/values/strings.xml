@@ -110,6 +110,9 @@
     <string name="time">10.00</string>
     <string name="pause">pause</string>
     <string name="your_result">Your Result</string>
+    <string name="schedule">Schedule</string>
+    <string name="title">Title</string>
+    <string name="title_activity_step">StepActivity</string>
 
 
 </resources>

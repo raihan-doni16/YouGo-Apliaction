@@ -21,6 +21,8 @@
             android:layout_height="match_parent"
             android:fillViewport="true">
 
+
+
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/image_yougo"
                 android:layout_width="wrap_content"
@@ -143,6 +145,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pose_yoga"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Large.FadingCircle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/splash"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/pose_yoga_recycler_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/image_yougo"
+                app:layout_constraintVertical_bias="0.476" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

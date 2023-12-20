@@ -16,6 +16,7 @@ import com.example.yougoapp.ui.detection.DetectionActivity
 import com.example.yougoapp.ui.login.LoginActivity
 import com.example.yougoapp.ui.pose.PoseFragment
 import com.example.yougoapp.ui.profile.ProfileFragment
+import com.example.yougoapp.ui.schedule.ScheduleActivity
 
 
 class HomeActivity : AppCompatActivity() {
@@ -31,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         replaceFragment(HomeFragment())
-        binding
+
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_nav -> replaceFragment(HomeFragment())
@@ -40,6 +41,13 @@ class HomeActivity : AppCompatActivity() {
                     val intent = Intent(this, BmiActivity::class.java)
                     startActivity(intent)
                     true
+                    finish()
+                }
+                R.id.schedule_nav -> {
+                    val intent = Intent(this, ScheduleActivity::class.java)
+                    startActivity(intent)
+                    true
+                    finish()
                 }
 
                 R.id.profile_nav -> replaceFragment(ProfileFragment())
@@ -56,11 +64,11 @@ class HomeActivity : AppCompatActivity() {
             }
         }
         setUp()
-        binding.bottomScan.setOnClickListener {
+        /*binding.bottomScan.setOnClickListener {
             val intent = Intent(this, DetectionActivity::class.java)
             startActivity(intent)
             true
-        }
+        }*/
     }
 
     private fun setUp() {

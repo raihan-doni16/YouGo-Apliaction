@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.yougoapp.data.Injection
 import com.example.yougoapp.repository.YogaRepository
+import com.example.yougoapp.ui.BMI.BmiViewModel
 import com.example.yougoapp.ui.article.ArticleViewModel
 import com.example.yougoapp.ui.detection.DetectionViewModel
 import com.example.yougoapp.ui.home.HomeViewModel
@@ -46,6 +47,9 @@ class ViewModelFactory(private val repository: YogaRepository) :
             }
             modelClass.isAssignableFrom(ProfileViewModel::class.java)->{
                 ProfileViewModel(repository)as T
+            }
+            modelClass.isAssignableFrom(BmiViewModel::class.java)->{
+                BmiViewModel(repository)as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel Class: "+ modelClass.name)
 

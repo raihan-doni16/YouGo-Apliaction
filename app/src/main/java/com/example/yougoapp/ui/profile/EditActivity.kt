@@ -26,23 +26,23 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val email = binding.edEmail.text
-        val firstName = binding.edFirstName.text
-        val lastName = binding.edLastName.text
-        val age = binding.edUmur.text
-        val weight = binding.edBerat.text
-        val height = binding.edTinggi.text
+        val email = binding.edEmail.text.toString()
+        val firstName = binding.edFirstName.text.toString()
+        val lastName = binding.edLastName.text.toString()
+        val age = binding.edUmur.text.toString()
+        val weight = binding.edBerat.text.toString()
+        val height = binding.edTinggi.text.toString()
 
         binding.btnSave.setOnClickListener {
             imageUri?.let { uri ->
                 val image = uriToFile(uri, this).reduceFileImage()
                 viewModel.postProfile(
-                    email.toString(),
-                    firstName.toString(),
-                    lastName.toString(),
-                    age.toString(),
-                    weight.toString(),
-                    height.toString(),
+                    email,
+                    firstName,
+                    lastName,
+                    age,
+                    weight,
+                    height,
                     image,
                 ).observe(this) {
                     finish()

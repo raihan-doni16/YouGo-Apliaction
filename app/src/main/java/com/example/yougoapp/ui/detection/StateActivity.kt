@@ -5,8 +5,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.example.yougoapp.R
 import com.example.yougoapp.data.State
 import com.example.yougoapp.databinding.ActivityStateBinding
@@ -16,6 +18,7 @@ import com.example.yougoapp.ui.reduceFileImage
 import com.example.yougoapp.ui.uriToFile
 
 class StateActivity : AppCompatActivity() {
+    private  lateinit var progressBar: ProgressBar
     private  val viewModel by viewModels<DetectionViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -35,6 +38,8 @@ class StateActivity : AppCompatActivity() {
         imageUri = intent?.getStringExtra(EXTRA_IMAGE)?.let { Uri.parse(it) }
         Log.d("image",imageUri.toString())
         showImage()
+        progressBar = binding.spinKit
+        progressBar.isVisible= false
         binding.btnSend.setOnClickListener {
             imageUri?.let { uri ->
                 val imageFile = uriToFile(uri,this).reduceFileImage()
@@ -43,7 +48,7 @@ class StateActivity : AppCompatActivity() {
                     if (data !=null){
                         when(data){
                             is State.Loading ->{
-
+                                progressBar.isVisible = true
                             }
                             is State.Success ->{
                                 val poseName  = data.data.pose.yogaPose

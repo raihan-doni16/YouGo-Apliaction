@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.example.yougoapp.R
 import com.example.yougoapp.data.State
 import com.example.yougoapp.databinding.ActivityRegisterBinding
@@ -15,7 +17,7 @@ import com.example.yougoapp.factory.ViewModelFactory
 import com.example.yougoapp.ui.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
-
+   private  lateinit var progressBar: ProgressBar
     private val viewModel by viewModels<RegisterViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -25,7 +27,8 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+            progressBar = findViewById(R.id.spin_kit)
+            progressBar.isVisible = false
         binding.textSignIn.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -61,7 +64,7 @@ class RegisterActivity : AppCompatActivity() {
                 viewModel.register(email, password).observe(this){user ->
                     when(user){
                         is State.Loading ->{
-
+                            progressBar.isVisible = false
                         }
                         is State.Success ->{
                             Toast.makeText(this, "Register Sukses", Toast.LENGTH_SHORT).show()

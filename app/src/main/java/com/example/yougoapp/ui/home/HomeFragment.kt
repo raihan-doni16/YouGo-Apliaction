@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +27,7 @@ import com.example.yougoapp.ui.pose.PoseFragment
 
 
 class HomeFragment : Fragment() {
+    private  lateinit var progressBar: ProgressBar
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: RecPosAdapter
     private  lateinit var articleAdapter: RecArtAdapter
@@ -45,6 +48,8 @@ class HomeFragment : Fragment() {
             startActivity(intent)
             true
         }
+        progressBar = binding.spinKit
+        progressBar.isVisible = true
             binding.seePose.setOnClickListener {
 
                 val fragmentManager = requireActivity().supportFragmentManager
@@ -63,8 +68,8 @@ class HomeFragment : Fragment() {
 
         val imageList = ArrayList<SlideModel>()
         imageList.add(SlideModel(R.drawable.home_yoga, "Yoga: Your path to inner strength and tranquility."))
-        imageList.add(SlideModel(R.drawable.home_yoga, "Embrace the journey of self-discovery through yoga"))
-        imageList.add(SlideModel(R.drawable.home_yoga, "Cultivate wellness and mindfulness through the art of yoga"))
+        imageList.add(SlideModel(R.drawable.yoga1, "Embrace the journey of self-discovery through yoga"))
+        imageList.add(SlideModel(R.drawable.yoga2, "Cultivate wellness and mindfulness through the art of yoga"))
         imageSlider?.setImageList(imageList, ScaleTypes.CENTER_CROP)
 
         return binding.root
@@ -76,7 +81,7 @@ class HomeFragment : Fragment() {
             if (data != null) {
                 when (data) {
                     is State.Loading -> {
-
+                        progressBar.isVisible = false
                     }
 
                     is State.Success -> {
