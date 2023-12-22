@@ -23,20 +23,28 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.example.yougoapp.databinding.ActivityDetectionBinding
 import com.example.yougoapp.ui.createCustomTempFile
+import com.example.yougoapp.ui.home.HomeActivity
+import com.example.yougoapp.ui.pose.DetailPoseActivity
 
 class DetectionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetectionBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
-    private  var imageUri: Uri? = null
-    private var idUser =""
+    private var imageUri: Uri? = null
+    private var idUser = ""
+    private var image: String? = null
+    private var title: String? = null
+
     companion object {
         const val EXTRA_ID = "extraId"
+        const val EXTRA_IMAGE = "extraImage"
+        const val EXTRA_TITLE = "extraTitle"
         private const val TAG = "CameraActivity"
         const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
         const val CAMERAX_RESULT = 200
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
+
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -47,14 +55,17 @@ class DetectionActivity : AppCompatActivity() {
                 Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
             }
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val id = intent.getStringExtra(EXTRA_ID)
-        Log.d("cek detection",id?:"")
-        idUser = id ?:""
-        if (!allPermissionGranted()){
+        image = intent.getStringExtra(EXTRA_IMAGE)
+        title = intent.getStringExtra(EXTRA_TITLE)
+        Log.d("cek detection", id ?: "")
+        idUser = id ?: ""
+        if (!allPermissionGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
@@ -72,21 +83,29 @@ class DetectionActivity : AppCompatActivity() {
             startGallery()
         }
     }
-    private  fun allPermissionGranted()= ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSION)== PackageManager.PERMISSION_GRANTED
 
-    private  fun startGallery(){
+    private fun allPermissionGranted() = ContextCompat.checkSelfPermission(
+        this,
+        REQUIRED_PERMISSION
+    ) == PackageManager.PERMISSION_GRANTED
+
+    private fun startGallery() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
 
     }
-    private val launcherGallery = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
-        if (uri != null) {
-            imageUri = uri
-            val intent = Intent(this, StateActivity::class.java)
-            intent.putExtra(StateActivity.EXTRA_IMAGE, imageUri.toString())
-            intent.putExtra(StateActivity.ID_EXTRA,idUser)
-            startActivity(intent)
+
+    private val launcherGallery =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
+            if (uri != null) {
+                imageUri = uri
+                val intent = Intent(this, StateActivity::class.java)
+                intent.putExtra(StateActivity.EXTRA_IMAGE, imageUri.toString())
+                intent.putExtra(StateActivity.ID_EXTRA, idUser)
+                intent.putExtra(StateActivity.EXTRA_TITLE, title)
+                intent.putExtra(StateActivity.IMAGE,image)
+                startActivity(intent)
+            }
         }
-    }
 
     public override fun onResume() {
         super.onResume()
@@ -148,22 +167,27 @@ class DetectionActivity : AppCompatActivity() {
             }
         )
     }
-    private  fun hideSystemUI(){
+
+    private fun hideSystemUI() {
         @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
-        }else{
-            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
         }
         supportActionBar?.hide()
     }
-    private  val orientationEventListener by lazy {
-        object : OrientationEventListener(this){
+
+    private val orientationEventListener by lazy {
+        object : OrientationEventListener(this) {
             override fun onOrientationChanged(orientation: Int) {
-                if (orientation == ORIENTATION_UNKNOWN){
+                if (orientation == ORIENTATION_UNKNOWN) {
                     return
                 }
-                val rotation = when(orientation){
+                val rotation = when (orientation) {
                     in 45 until 135 -> Surface.ROTATION_270
                     in 135 until 225 -> Surface.ROTATION_180
                     in 225 until 315 -> Surface.ROTATION_90
@@ -173,6 +197,7 @@ class DetectionActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onStart() {
         super.onStart()
         orientationEventListener.enable()
@@ -182,11 +207,14 @@ class DetectionActivity : AppCompatActivity() {
         super.onStop()
         orientationEventListener.disable()
     }
+
     private fun launchStateActivity(savedUri: Uri?) {
         savedUri?.let { uri ->
             val intent = Intent(this, StateActivity::class.java)
             intent.putExtra(StateActivity.EXTRA_IMAGE, uri.toString())
             intent.putExtra(StateActivity.ID_EXTRA, idUser)
+            intent.putExtra(StateActivity.EXTRA_TITLE, title)
+            intent.putExtra(StateActivity.IMAGE,image)
             startActivity(intent)
         } ?: run {
 
@@ -194,4 +222,9 @@ class DetectionActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+
+    }
 }

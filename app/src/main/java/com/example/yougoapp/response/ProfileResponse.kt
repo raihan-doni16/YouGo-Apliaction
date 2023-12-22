@@ -35,7 +35,7 @@ data class UserProfile(
 	val imageUrl: String,
 
 	@field:SerializedName("weight")
-	val weight: String,
+	val weight: Int,
 
 	@field:SerializedName("idealWeightRange")
 	val idealWeightRange: String,
@@ -44,10 +44,10 @@ data class UserProfile(
 	val id: String,
 
 	@field:SerializedName("age")
-	val age: String,
+	val age: Int,
 
 	@field:SerializedName("height")
-	val height: String,
+	val height: Int,
 
 	@field:SerializedName("bmi")
 	val bmi: String,

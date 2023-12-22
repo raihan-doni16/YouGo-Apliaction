@@ -2,13 +2,13 @@ package com.example.yougoapp.ui.login
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.yougoapp.R
 import com.example.yougoapp.data.State
@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> {
         ViewModelFactory.getInstance(this)
     }
-    private  lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: ProgressBar
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,8 @@ class LoginActivity : AppCompatActivity() {
         setUp()
         actionLogin()
     }
-    private  fun setUp(){
+
+    private fun setUp() {
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
@@ -78,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
                                 val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                                 startActivity(intent)
                                 val dataUser = UserData(
-                                    user.data.loginResult.userId ?:"",
+                                    user.data.loginResult.userId ?: "",
                                     user.data.loginResult!!.accessToken,
                                     user.data.loginResult!!.refreshToken,
                                     true

@@ -13,6 +13,7 @@ import com.example.yougoapp.ui.login.LoginViewModel
 import com.example.yougoapp.ui.pose.PoseViewModel
 import com.example.yougoapp.ui.profile.ProfileViewModel
 import com.example.yougoapp.ui.register.RegisterViewModel
+import com.example.yougoapp.ui.schedule.ScheduleViewModel
 import com.example.yougoapp.ui.splashscreen.ExploreViewModel
 
 class ViewModelFactory(private val repository: YogaRepository) :
@@ -50,6 +51,9 @@ class ViewModelFactory(private val repository: YogaRepository) :
             }
             modelClass.isAssignableFrom(BmiViewModel::class.java)->{
                 BmiViewModel(repository)as T
+            }
+            modelClass.isAssignableFrom(ScheduleViewModel::class.java)->{
+                ScheduleViewModel(repository)as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel Class: "+ modelClass.name)
 

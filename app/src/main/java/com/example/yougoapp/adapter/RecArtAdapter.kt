@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.yougoapp.databinding.RekomendasiArticleBinding
 import com.example.yougoapp.response.ArtikelItem
-import com.example.yougoapp.response.Data
 import com.example.yougoapp.ui.article.DetailArticleActivity
 
 class RecArtAdapter ( private  var article: List<ArtikelItem>):RecyclerView.Adapter<RecArtAdapter.ArticleViewHolder>() {

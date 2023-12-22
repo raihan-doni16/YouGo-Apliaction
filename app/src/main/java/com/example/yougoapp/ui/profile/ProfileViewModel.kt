@@ -8,7 +8,16 @@ import java.io.File
 
 class ProfileViewModel(private val repository: YogaRepository) : ViewModel() {
     fun getProfile() = repository.getProfile()
-    fun postProfile(email: String, firstName: String, lastName: String, age: String, weight: String,  height: String, image: File) = repository.postProfile(email,firstName, lastName, age,weight,height,image)
+    fun postProfile(
+        email: String,
+        firstName: String,
+        lastName: String,
+        age: Int,
+        weight: Int,
+        height: Int,
+        image: File
+    ) = repository.postProfile(email, firstName, lastName, age, weight, height, image)
+
     fun logout() {
         viewModelScope.launch {
             repository.logout()

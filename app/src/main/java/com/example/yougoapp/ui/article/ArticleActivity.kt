@@ -2,7 +2,6 @@ package com.example.yougoapp.ui.article
 
 import android.os.Bundle
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -13,9 +12,6 @@ import com.example.yougoapp.adapter.ArticleAdapter
 import com.example.yougoapp.data.State
 import com.example.yougoapp.databinding.ActivityArticleBinding
 import com.example.yougoapp.factory.ViewModelFactory
-import com.example.yougoapp.response.ArtikelItem
-import retrofit2.http.Query
-import java.util.Locale
 
 class ArticleActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar

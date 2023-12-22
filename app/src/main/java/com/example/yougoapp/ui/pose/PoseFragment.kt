@@ -17,10 +17,10 @@ import com.example.yougoapp.factory.ViewModelFactory
 
 
 class PoseFragment : Fragment() {
-    private  lateinit var  progressBar: ProgressBar
+    private lateinit var progressBar: ProgressBar
     private lateinit var binding: PoseFragmentBinding
     private lateinit var adapter: PoseAdapter
-    private  lateinit var searchView: SearchView
+    private lateinit var searchView: SearchView
     private val viewModel by viewModels<PoseViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -28,21 +28,21 @@ class PoseFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
+    ): View {
 
         binding = PoseFragmentBinding.inflate(inflater)
 
-             progressBar = binding.spinKit
-        progressBar.isVisible =true
+        progressBar = binding.spinKit
+        progressBar.isVisible = true
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvPose.layoutManager = layoutManager
         adapter = PoseAdapter(emptyList())
-        binding.rvPose.adapter =adapter
+        binding.rvPose.adapter = adapter
         searchView = binding.searchPose
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-               return false
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -69,9 +69,11 @@ class PoseFragment : Fragment() {
                         adapter.setData(pose)
 
                     }
-                    is State.Error ->{
+
+                    is State.Error -> {
 
                     }
+
                     else -> false
                 }
             }

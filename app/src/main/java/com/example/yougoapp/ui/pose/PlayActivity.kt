@@ -2,7 +2,6 @@ package com.example.yougoapp.ui.pose
 
 import android.content.Intent
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
@@ -11,13 +10,12 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.yougoapp.R
 import com.example.yougoapp.adapter.Item
 import com.example.yougoapp.data.State
 import com.example.yougoapp.factory.ViewModelFactory
-import com.example.yougoapp.response.DetailItem
 import java.util.Locale
 
 class PlayActivity : AppCompatActivity() {
@@ -32,8 +30,8 @@ class PlayActivity : AppCompatActivity() {
     private lateinit var detailItems: List<Item>
     private var currentIndex = 0
     var id: String? = null
-    var title : String? =""
-    var image : String? =""
+    var title: String? = ""
+    var image: String? = ""
     private val viewModel by viewModels<PoseViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -63,7 +61,7 @@ class PlayActivity : AppCompatActivity() {
                 }
 
                 is State.Success -> {
-                     image = result.data.pose.imageUrl
+                    image = result.data.pose.imageUrl
                     title = result.data.pose.title
                     val data = result.data.pose.detail.map {
                         Item(
@@ -163,7 +161,7 @@ class PlayActivity : AppCompatActivity() {
                     showItem(currentIndex)
                 } else {
                     val intent = Intent(this@PlayActivity, DetailPoseActivity::class.java)
-                    intent.putExtra(DetailPoseActivity.EXTRA_ID,id)
+                    intent.putExtra(DetailPoseActivity.EXTRA_ID, id)
                     intent.putExtra(DetailPoseActivity.EXTRA_PHOTO, image)
                     intent.putExtra(DetailPoseActivity.EXTRA_TITLE, title)
                     startActivity(intent)

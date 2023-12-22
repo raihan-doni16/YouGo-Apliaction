@@ -15,7 +15,6 @@ class BmiAdapter(private  var poseData: List<PoseItem>): RecyclerView.Adapter<Bm
     inner  class  BmiViewHolder(private  val binding: ItemPoseBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: PoseItem){
             binding.tvItemTitle.text = data.title
-//            binding.tvItemTime.text = data.time.toString()
             Glide.with(itemView.context).load(data.imageUrl)
                 .into(binding.tvItemPhoto)
 

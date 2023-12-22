@@ -8,11 +8,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.yougoapp.databinding.ItemArticleBinding
-import com.example.yougoapp.databinding.ItemPoseBinding
-import com.example.yougoapp.databinding.RekomendasiArticleBinding
-import com.example.yougoapp.response.ArticleItem
 import com.example.yougoapp.response.ArtikelItem
-import com.example.yougoapp.response.Data
 import com.example.yougoapp.ui.article.DetailArticleActivity
 import java.util.Locale
 

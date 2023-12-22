@@ -1,7 +1,6 @@
 package com.example.yougoapp.ui.home
 
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.ImageSlider
-import com.denzcoskun.imageslider.constants.AnimationTypes
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.yougoapp.R
@@ -27,10 +25,10 @@ import com.example.yougoapp.ui.pose.PoseFragment
 
 
 class HomeFragment : Fragment() {
-    private  lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: ProgressBar
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: RecPosAdapter
-    private  lateinit var articleAdapter: RecArtAdapter
+    private lateinit var articleAdapter: RecArtAdapter
     private val viewModel by viewModels<HomeViewModel> {
 
         ViewModelFactory.getInstance(requireContext())
@@ -50,26 +48,42 @@ class HomeFragment : Fragment() {
         }
         progressBar = binding.spinKit
         progressBar.isVisible = true
-            binding.seePose.setOnClickListener {
+        binding.seePose.setOnClickListener {
 
-                val fragmentManager = requireActivity().supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                val newFragment = PoseFragment()
-                fragmentTransaction.replace(R.id.navHost, newFragment)
-                fragmentTransaction.commit()
-            }
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val newFragment = PoseFragment()
+            fragmentTransaction.replace(R.id.navHost, newFragment)
+            fragmentTransaction.commit()
+        }
 
 
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.poseYogaRecyclerView.layoutManager = layoutManager
 
-        val layout= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val layout = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.articleKebugaranRecyclerView.layoutManager = layout
 
         val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel(R.drawable.home_yoga, "Yoga: Your path to inner strength and tranquility."))
-        imageList.add(SlideModel(R.drawable.yoga1, "Embrace the journey of self-discovery through yoga"))
-        imageList.add(SlideModel(R.drawable.yoga2, "Cultivate wellness and mindfulness through the art of yoga"))
+        imageList.add(
+            SlideModel(
+                R.drawable.home_yoga,
+                "Yoga: Your path to inner strength and tranquility."
+            )
+        )
+        imageList.add(
+            SlideModel(
+                R.drawable.yoga1,
+                "Embrace the journey of self-discovery through yoga"
+            )
+        )
+        imageList.add(
+            SlideModel(
+                R.drawable.yoga2,
+                "Cultivate wellness and mindfulness through the art of yoga"
+            )
+        )
         imageSlider?.setImageList(imageList, ScaleTypes.CENTER_CROP)
 
         return binding.root

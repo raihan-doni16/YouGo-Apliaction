@@ -2,20 +2,15 @@ package com.example.yougoapp.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.example.yougoapp.R
 import com.example.yougoapp.data.State
 import com.example.yougoapp.databinding.FragmentProfileBinding
 import com.example.yougoapp.factory.ViewModelFactory
-import com.example.yougoapp.ui.home.HomeViewModel
-
-
 
 
 class ProfileFragment : Fragment() {
@@ -34,28 +29,31 @@ class ProfileFragment : Fragment() {
             val intent = Intent(context, EditActivity::class.java)
             startActivity(intent)
         }
-        viewModel.getProfile().observe(viewLifecycleOwner){prof->
-            if (prof != null){
-                when(prof){
-                    is State.Loading ->{
+
+
+        viewModel.getProfile().observe(viewLifecycleOwner) { prof ->
+            if (prof != null) {
+                when (prof) {
+                    is State.Loading -> {
 
                     }
-                    is State.Success ->{
+
+                    is State.Success -> {
+
                         val firstName = prof.data.profile.firstName
                         val lastName = prof.data.profile.lastName
-                        binding.tvName.text = "$firstName  $lastName"
-
-                        binding.edBerat.text= prof.data.profile.weight.toString()
+                        binding.tvName.text = "$firstName $lastName"
+                        binding.edBerat.text = prof.data.profile.weight.toString().trim()
                         binding.edBmi.text = prof.data.profile.status
-                        binding.edUmur.text = prof.data.profile.age.toString()
+                        binding.edUmur.text = prof.data.profile.age.toString().trim()
                         binding.edEmail.text = prof.data.email
                         Glide.with(requireContext()).load(prof.data.profile.imageUrl)
                             .into(binding.circleImageView)
 
 
-
                     }
-                    is State.Error ->{
+
+                    is State.Error -> {
 
                     }
                 }
@@ -64,7 +62,7 @@ class ProfileFragment : Fragment() {
         }
 
 
-        binding.btnKeluar.setOnClickListener{
+        binding.btnKeluar.setOnClickListener {
             viewModel.logout()
         }
         return binding.root

@@ -8,11 +8,11 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.yougoapp.R
 import com.example.yougoapp.databinding.ActivityMainBinding
 import com.example.yougoapp.factory.ViewModelFactory
 import com.example.yougoapp.ui.BMI.BmiActivity
-import com.example.yougoapp.ui.detection.DetectionActivity
 import com.example.yougoapp.ui.login.LoginActivity
 import com.example.yougoapp.ui.pose.PoseFragment
 import com.example.yougoapp.ui.profile.ProfileFragment
@@ -24,6 +24,9 @@ class HomeActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<HomeViewModel> {
         ViewModelFactory.getInstance(this)
+    }
+    private val navController by lazy {
+        findNavController(R.id.navHost)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +46,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                     finish()
                 }
+
                 R.id.schedule_nav -> {
                     val intent = Intent(this, ScheduleActivity::class.java)
                     startActivity(intent)
@@ -87,6 +91,7 @@ class HomeActivity : AppCompatActivity() {
         val fragmentManeger = supportFragmentManager
         val fragmentTransaction = fragmentManeger.beginTransaction()
         fragmentTransaction.replace(R.id.navHost, fragment)
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 

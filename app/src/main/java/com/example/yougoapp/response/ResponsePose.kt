@@ -23,5 +23,8 @@ import com.google.gson.annotations.SerializedName
 	val title: String,
 
 	@field:SerializedName("category")
-	val category: String
+	val category: String,
+
+	 @field:SerializedName("total_time")
+	 val total_time: String
 )

@@ -65,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:hint="@string/firtname"
                 android:background="@android:color/transparent"
                 android:paddingLeft="40dp"
                 android:text="" />
@@ -86,6 +87,7 @@
                 android:id="@+id/ed_lastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/last_name"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:paddingLeft="40dp"
@@ -106,6 +108,7 @@
 
             <EditText
                 android:id="@+id/ed_email"
+                android:hint="@string/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -129,6 +132,7 @@
             <EditText
                 android:id="@+id/ed_umur"
                 android:layout_width="match_parent"
+                android:hint="@string/age"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
@@ -152,6 +156,7 @@
                 android:id="@+id/ed_berat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/weight"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
                 android:paddingLeft="40dp"
@@ -171,6 +176,7 @@
                 android:src="@drawable/baseline_height_24" />
 
             <EditText
+                android:hint="@string/height"
                 android:id="@+id/ed_tinggi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

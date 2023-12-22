@@ -1,15 +1,12 @@
 package com.example.yougoapp.ui.splashscreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.example.yougoapp.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.yougoapp.databinding.ActivityExploreBinding
 import com.example.yougoapp.factory.ViewModelFactory
-import com.example.yougoapp.repository.YogaRepository
 import com.example.yougoapp.ui.home.HomeActivity
-import com.example.yougoapp.ui.home.HomeViewModel
 import com.example.yougoapp.ui.login.LoginActivity
 
 class ExploreActivity : AppCompatActivity() {

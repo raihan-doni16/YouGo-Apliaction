@@ -9,10 +9,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.yougoapp.databinding.ItemPoseBinding
-import com.example.yougoapp.response.ArtikelItem
-import com.example.yougoapp.response.Data
 import com.example.yougoapp.response.PoseItem
-import com.example.yougoapp.ui.article.DetailArticleActivity
 import com.example.yougoapp.ui.pose.DetailPoseActivity
 import java.util.Locale
 
@@ -28,7 +25,7 @@ class PoseAdapter(private var poseData: List<PoseItem>) :
         fun bind(data: PoseItem) {
 
             binding.tvItemTitle.text = data.title
-            binding.tvItemTime.text = data.title
+            binding.tvItemTime.text = data.total_time
             Glide.with(itemView.context).load(data.imageUrl)
                 .into(binding.tvItemPhoto)
             binding.itemLayout.setOnClickListener {

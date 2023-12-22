@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.yougoapp.databinding.ItemPoseBinding
-import com.example.yougoapp.databinding.RekomendasiArticleBinding
 import com.example.yougoapp.databinding.RekomendasiPoseBinding
-import com.example.yougoapp.response.Data
 import com.example.yougoapp.response.PoseItem
 import com.example.yougoapp.ui.pose.DetailPoseActivity
 
@@ -17,7 +14,7 @@ class RecPosAdapter(private  var poseData: List<PoseItem>): RecyclerView.Adapter
     inner  class  RecPoseViewHolder(private  val binding: RekomendasiPoseBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: PoseItem){
             binding.tvItemTitle.text = data.title
-//            binding.tvItemTime.text = data.time.toString()
+            binding.tvItemTime.text = data.total_time
             Glide.with(itemView.context).load(data.imageUrl)
                 .into(binding.tvItemPhoto)
 

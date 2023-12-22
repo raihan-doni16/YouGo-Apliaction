@@ -1,17 +1,13 @@
 package com.example.yougoapp.network
 
-import com.example.yougoapp.response.ArticleResponse
 import com.example.yougoapp.response.DetailResponse
 import com.example.yougoapp.response.DetectionResponse
 import com.example.yougoapp.response.LoginResponse
-import com.example.yougoapp.response.PoseResponse
 import com.example.yougoapp.response.ProfileResponse
 import com.example.yougoapp.response.RegisterResponse
 import com.example.yougoapp.response.ResponseArticle
 import com.example.yougoapp.response.ResponsePose
 import okhttp3.MultipartBody
-import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -58,9 +54,9 @@ interface ApiService {
         @Part("email") email: String,
         @Part("firstName") firstName: String,
         @Part("lastName") lastName: String,
-        @Part("age") age: String,
-        @Part("weight") weight: String,
-        @Part("height") height: String,
+        @Part("age") age: Int,
+        @Part("weight") weight: Int,
+        @Part("height") height: Int,
         @Part image: MultipartBody.Part
     ): ProfileResponse
     @Multipart
@@ -95,6 +91,7 @@ interface ApiService {
 
     @GET("poses")
     suspend fun getPoses(): ResponsePose
+
     @GET("poses/{id}")
     suspend fun getDetailPose(@Path("id")id:String): DetailResponse
 

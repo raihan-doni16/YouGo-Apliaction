@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:text="Wiliam Snoe"
+                android:text="@string/name"
                 android:textColor="#fff"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -96,7 +96,7 @@
                         android:id="@+id/ed_bmi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Obesitas"
+                        android:text="___"
                         android:textStyle="bold"
                         android:paddingRight="60dp"
                         android:textSize="20sp"
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="40dp"
-                android:text="Wiliam@gmail.com"
+                android:text="@string/email"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="40dp"
-                android:text="27 Tahun"
+                android:text="@string/age"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="40dp"
-                android:text="75 kg"
+                android:text="@string/weight"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -200,8 +200,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+
                 android:paddingLeft="40dp"
-                android:text="160 kg"
+                android:text="@string/height"
                 android:textStyle="bold" />
         </LinearLayout>
 

@@ -6,36 +6,38 @@ import androidx.lifecycle.liveData
 import com.example.yougoapp.data.State
 import com.example.yougoapp.data.UserData
 import com.example.yougoapp.data.YogaPreference
+import com.example.yougoapp.data.database.Yoga
+import com.example.yougoapp.data.database.YogaDao
 import com.example.yougoapp.network.ApiConfig
 import com.example.yougoapp.network.ApiService
-import com.example.yougoapp.response.ArticleItem
 import com.example.yougoapp.response.ArtikelItem
-import com.example.yougoapp.response.Data
 import com.example.yougoapp.response.DetailResponse
 import com.example.yougoapp.response.DetectionResponse
 import com.example.yougoapp.response.ErrorResponse
 import com.example.yougoapp.response.LoginResponse
 import com.example.yougoapp.response.PoseItem
-
-import com.example.yougoapp.response.PoseResponse
-import com.example.yougoapp.response.Profile
 import com.example.yougoapp.response.ProfileResponse
 import com.example.yougoapp.response.RegisterResponse
 import com.example.yougoapp.response.UserProfile
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
 import java.io.File
 import java.io.IOException
 import java.net.SocketTimeoutException
+import java.util.Calendar
 
 class YogaRepository private constructor(
+    private  val dao: YogaDao,
     private val yogaPreference: YogaPreference,
     private val apiService: ApiService
 ) {
@@ -43,13 +45,21 @@ class YogaRepository private constructor(
         @Volatile
         private var instance: YogaRepository? = null
         fun getInstance(
-            yogaPreference: YogaPreference, apiService: ApiService
+            yogaPreference: YogaPreference, apiService: ApiService, dao: YogaDao
         ): YogaRepository =
             instance ?: synchronized(this) {
-                instance ?: YogaRepository(yogaPreference, apiService)
+                instance ?: YogaRepository( dao,yogaPreference, apiService,)
             }.also { instance = it }
     }
-
+    fun addSchedule(id: Int,scheduleName : String, poseId: String,dayTime: String ){
+        CoroutineScope(Dispatchers.IO).launch {
+            var data = Yoga(id,dayTime,poseId,scheduleName)
+            dao?.insert(data)
+        }
+    }
+    fun getSchedule():LiveData<List<Yoga>>?{
+        return  dao?.getAll()
+    }
     fun register(email: String, password: String): LiveData<State<RegisterResponse>> = liveData {
         emit(State.Loading)
         try {
@@ -65,6 +75,7 @@ class YogaRepository private constructor(
             emit(State.Error("Internet Issues"))
         }
     }
+
 
     fun login(email: String, password: String): LiveData<State<LoginResponse>> = liveData {
         emit(State.Loading)
@@ -130,7 +141,7 @@ class YogaRepository private constructor(
             Log.e("detection", "Exception occurred", e)
         }
     }
-    fun postProfile( email: String,firstName: String, lastName: String, age: String, weight: String,  height: String,image: File): LiveData<State<ProfileResponse>> = liveData {
+    fun postProfile( email: String,firstName: String, lastName: String, age: Int, weight:Int,  height: Int,image: File): LiveData<State<ProfileResponse>> = liveData {
         emit(State.Loading)
         try {
             val requestFile = image.asRequestBody("image/jpeg".toMediaType())
@@ -256,7 +267,8 @@ class YogaRepository private constructor(
                     data.imageUrl,
                     data.id,
                     data.title,
-                    data.category
+                    data.category,
+                    data.total_time
                 )
             }
             if(poseList.isEmpty()){
@@ -277,6 +289,16 @@ class YogaRepository private constructor(
         }catch (e: SocketTimeoutException){
             emit(State.Error("Read timeout occurred"))
         }
+    }
+    suspend fun deleteSchedule(scheduleId: String) {
+        withContext(Dispatchers.IO) {
+            dao.deleteFav(scheduleId)
+        }
+    }
+    fun getTodaySchedule() : List<Yoga> {
+        val date = Calendar.getInstance()
+        val day = date.get(Calendar.DAY_OF_WEEK)
+        return dao.getTodaySchedule(day)
     }
     suspend fun saveSession(user: UserData){
         yogaPreference.saveSession(user)
